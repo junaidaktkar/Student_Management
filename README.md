@@ -236,25 +236,6 @@ public Student getStudentById(Long id) {
     return studentRepository.findById(id)
             .orElseThrow(() -> new StudentNotFoundException("Student not found with id: " + id));
 }
-```
-
-### Admin Interceptor
-```java
-@Component
-public class AdminAccessInterceptor implements HandlerInterceptor {
-
-    @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        String role = request.getHeader("X-User-Role");
-        if (!"ADMIN".equals(role)) {
-            response.setStatus(HttpStatus.FORBIDDEN.value());
-            return false;
-        }
-        return true;
-    }
-}
-```
-
 ---
 
 ## Author
